@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -14,6 +13,7 @@ namespace EquationLPP.models {
         private Line _vectorN = new Line();
         private readonly List<Line> _listLines = new List<Line>();
         private readonly List<Polygon> _listPolygon = new List<Polygon>();
+        private readonly List<Ellipse> _listPoints = new List<Ellipse>();
         public async Task DrawLinesAsync(ObservableCollection<Equation> listEquation, Canvas canvas) {
             _canvas = canvas;
             await ClearCanvasAsync();
@@ -67,6 +67,7 @@ namespace EquationLPP.models {
                 Width = 10, Height = 10, Margin = new Thickness(point.X - 5, point.Y - 5, 0, 0), Fill = Brushes.Red
               , ToolTip = toolTip
             };
+            _listPoints.Add(ellipse);
             _canvas!.Children.Add(ellipse);
         }
         public async Task DrawVectorNAsync(Point endPoint, Canvas canvas) {
@@ -101,6 +102,7 @@ namespace EquationLPP.models {
             if (_listLines.Count == 0) return;
             foreach (var element in _listLines) _canvas!.Children.Remove(element);
             foreach (var element in _listPolygon) _canvas!.Children.Remove(element);
+            foreach (var element in _listPoints) _canvas!.Children.Remove(element);
         }
         public static SolidColorBrush GetRandomSolidColorBrush() {
             var random = new Random();
