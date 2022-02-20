@@ -19,6 +19,7 @@
             <Grid Background="GhostWhite">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
@@ -27,7 +28,9 @@
                     <TextBox Style="{StaticResource InputTextStyle}" Width="250"
                              Text="{Binding SystemEquations.FunctionF}" />
                 </StackPanel>
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="10">
+                <TextBlock Grid.Row="1" Text="X1 >= 0 and X2 >= 0" Style="{StaticResource SimpleTextStyle}"
+                           Margin="0,10,0,-5" />
+                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="10">
                     <StackPanel>
                         <ItemsControl
                             ItemsSource="{Binding SystemEquations.ListEquation, UpdateSourceTrigger=PropertyChanged}">
@@ -61,7 +64,7 @@
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
-                <Button Grid.Row="2"
+                <Button Grid.Row="3"
                         Content="Show"
                         Margin="30,10"
                         Style="{StaticResource SimpleButtonStyle}"
