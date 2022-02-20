@@ -59,6 +59,11 @@ namespace EquationLPP.models {
                 await DrawPointAsync(new Point(elem.TwoPintsLines[0].X, elem.TwoPintsLines[0].Y));
                 await DrawPointAsync(new Point(elem.TwoPintsLines[1].X, elem.TwoPintsLines[1].Y));
             }
+            /*foreach (var item in listEquation) {
+                if(item == elem) continue;
+                var point = elem.GetCrossing(item);
+                await DrawPointAsync(point);
+            }*/
         }
         private async Task DrawPointAsync(Point point) {
             var toolTip = point.ToString();
@@ -76,6 +81,15 @@ namespace EquationLPP.models {
             var line = new Line {
                 StrokeThickness = 4, Stroke = Brushes.Black, X1 = 400, Y1 = 300, X2 = endPoint.X, Y2 = endPoint.Y
             };
+            /*var k1 = line.X1 - line.X1;
+            var k2 = line.Y2 - line.Y2;
+            var arrow = new Polygon {
+                StrokeThickness = 4, Stroke = Brushes.Black
+              , Points =
+                    PointCollection
+                       .Parse($"{line.X2 - k1},{line.Y2 - k1},{line.X2},{line.Y2},{line.X2 + 2},{line.Y2 + 2}")
+            };
+            _canvas!.Children.Add(arrow);*/
             _canvas!.Children.Add(line);
             _vectorN = line;
         }
