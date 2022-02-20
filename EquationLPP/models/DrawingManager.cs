@@ -56,14 +56,19 @@ namespace EquationLPP.models {
                 }
                 _listPolygon.Add(polygon);
                 _canvas.Children.Add(polygon);
-                await DrawPointAsync(new Point(elem.TwoPintsLines[0].X, elem.TwoPintsLines[0].Y));
-                await DrawPointAsync(new Point(elem.TwoPintsLines[1].X, elem.TwoPintsLines[1].Y));
+                if (elem.IsFirstQuarterP1)
+                    await DrawPointAsync(new Point(elem.TwoPintsLines[0].X, elem.TwoPintsLines[0].Y));
+                if (elem.IsFirstQuarterP2)
+                    await DrawPointAsync(new Point(elem.TwoPintsLines[1].X, elem.TwoPintsLines[1].Y));
             }
-            /*foreach (var item in listEquation) {
-                if(item == elem) continue;
-                var point = elem.GetCrossing(item);
-                await DrawPointAsync(point);
-            }*/
+            foreach (var elem in listEquation) {
+                if (!elem.IsParsed) continue;
+                foreach (var item in listEquation) {
+                    if (item == elem) continue;
+                    var point = elem.GetCrossing(item);
+                    if (point.X >= 0 && point.Y >= 0) await DrawPointAsync(point);
+                }
+            }
         }
         private async Task DrawPointAsync(Point point) {
             var toolTip = point.ToString();
@@ -72,6 +77,7 @@ namespace EquationLPP.models {
                 Width = 10, Height = 10, Margin = new Thickness(point.X - 5, point.Y - 5, 0, 0), Fill = Brushes.Red
               , ToolTip = toolTip
             };
+            if (_listPoints.Contains(ellipse)) return;
             _listPoints.Add(ellipse);
             _canvas!.Children.Add(ellipse);
         }
@@ -81,15 +87,6 @@ namespace EquationLPP.models {
             var line = new Line {
                 StrokeThickness = 4, Stroke = Brushes.Black, X1 = 400, Y1 = 300, X2 = endPoint.X, Y2 = endPoint.Y
             };
-            /*var k1 = line.X1 - line.X1;
-            var k2 = line.Y2 - line.Y2;
-            var arrow = new Polygon {
-                StrokeThickness = 4, Stroke = Brushes.Black
-              , Points =
-                    PointCollection
-                       .Parse($"{line.X2 - k1},{line.Y2 - k1},{line.X2},{line.Y2},{line.X2 + 2},{line.Y2 + 2}")
-            };
-            _canvas!.Children.Add(arrow);*/
             _canvas!.Children.Add(line);
             _vectorN = line;
         }
