@@ -61,14 +61,16 @@ namespace EquationLPP.models {
                 if (elem.IsFirstQuarterP2)
                     await DrawPointAsync(new Point(elem.TwoPintsLines[1].X, elem.TwoPintsLines[1].Y));
             }
-            foreach (var elem in listEquation) {
-                if (!elem.IsParsed) continue;
-                foreach (var item in listEquation) {
-                    if (item == elem) continue;
-                    var point = elem.GetCrossing(item);
-                    if (point.X >= 0 && point.Y >= 0) await DrawPointAsync(point);
+            try {
+                foreach (var elem in listEquation) {
+                    if (!elem.IsParsed) continue;
+                    foreach (var item in listEquation) {
+                        if (item == elem) continue;
+                        var point = elem.GetCrossing(item);
+                        if (point.X >= 0 && point.Y >= 0) await DrawPointAsync(point);
+                    }
                 }
-            }
+            } catch (Exception e) { return; }
         }
         private async Task DrawPointAsync(Point point) {
             var toolTip = point.ToString();
