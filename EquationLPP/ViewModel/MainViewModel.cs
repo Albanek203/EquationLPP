@@ -29,11 +29,10 @@ namespace EquationLPP.ViewModel {
 
         // === Add Equation Button ===
         private RelayCommand _addEquation;
-        public ICommand AddEquation => _addEquation ??= new RelayCommand(ExecuteAddEquation, CanExecuteAddEquation);
+        public ICommand AddEquation => _addEquation ??= new RelayCommand(ExecuteAddEquation);
         private void ExecuteAddEquation(object obj) {
             SystemEquations.ListEquation.Add(new Equation(DrawingManager.GetRandomSolidColorBrush()));
         }
-        private bool CanExecuteAddEquation(object obj) => true;
         // === End ===
 
         // === Remove Equation ===
@@ -53,7 +52,7 @@ namespace EquationLPP.ViewModel {
 
         // === Show Result ===
         private RelayCommand _showResult;
-        public ICommand ShowResult => _showResult ??= new RelayCommand(ExecuteShowResult, CanExecuteShowResult);
+        public ICommand ShowResult => _showResult ??= new RelayCommand(ExecuteShowResult);
         private async void ExecuteShowResult(object obj) {
             await _drawingManager.DrawLinesAsync(SystemEquations.ListEquation, (Canvas)obj);
             if (SystemEquations.ParseFunctionF())
@@ -61,13 +60,12 @@ namespace EquationLPP.ViewModel {
             else
                 await _drawingManager.RemoveVectorNAsync();
         }
-        private bool CanExecuteShowResult(object obj) => true;
         // === End ===
 
         // === Change Color ===
         private RelayCommand _changeLineColor;
         public ICommand ChangeLineColor =>
-            _changeLineColor ??= new RelayCommand(ExecuteChangeLineColor, CanExecuteChangeLineColor);
+            _changeLineColor ??= new RelayCommand(ExecuteChangeLineColor);
         private async void ExecuteChangeLineColor(object obj) {
             var colorDialog = new ColorDialog();
             if (colorDialog.ShowDialog() != DialogResult.OK) return;
@@ -77,7 +75,6 @@ namespace EquationLPP.ViewModel {
             ((Button)obj).Background = newColor;
             await _drawingManager.UpdateAsync(SystemEquations.ListEquation);
         }
-        private bool CanExecuteChangeLineColor(object obj) => true;
         // === End ===
     }
 }
