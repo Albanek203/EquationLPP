@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using EquationLPP.ViewModel;
 using System.Windows.Shapes;
@@ -68,6 +70,10 @@ namespace EquationLPP.View {
                     });
                 }
             });
+        }
+        private void Data_OnPreviewTextInput(object sender, TextCompositionEventArgs e) {
+            var regex = new Regex("[^0-9x<>=]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

@@ -41,7 +41,8 @@
                                                               {x:Type ItemsControl}},Path=DataContext.ChangeLineColor}"
                                                 CommandParameter="{Binding ElementName=ChangeLineColorButton}" />
                                         <TextBox Style="{StaticResource InputTextStyle}"
-                                                 Text="{Binding Data, UpdateSourceTrigger=PropertyChanged}" />
+                                                 Text="{Binding Data, UpdateSourceTrigger=PropertyChanged}"
+                                                 PreviewTextInput="Data_OnPreviewTextInput" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
