@@ -72,7 +72,7 @@ namespace EquationLPP.View {
             });
         }
         private void Data_OnPreviewTextInput(object sender, TextCompositionEventArgs e) {
-            var regex = new Regex("[^0-9x<>=]+");
+            var regex = new Regex("[^0-9x<>=+-]+");
             e.Handled = regex.IsMatch(e.Text);
         }
     }
