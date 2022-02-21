@@ -66,7 +66,8 @@ namespace EquationLPP.models {
                     foreach (var item in listEquation) {
                         if (item == elem || !item.IsParsed) continue;
                         var point = elem.GetCrossing(item)!;
-                        if (point.X >= 0 && point.Y >= 0 && elem.DrawnPoints.Count < 2) await DrawPointAsync(point, elem);
+                        if (point.X >= 0 && point.Y >= 0 && elem.DrawnPoints.Count < 2)
+                            await DrawPointAsync(point, elem);
                     }
                     if (elem.DrawnPoints.Count >= 2) continue;
                     if (elem.IsFirstQuarterP1)
@@ -87,7 +88,7 @@ namespace EquationLPP.models {
             if (_listPoints.Where(x => (int)x.Margin.Top == (int)ellipse.Margin.Top &&
                                        (int)x.Margin.Right == (int)ellipse.Margin.Right &&
                                        (int)x.Margin.Left == (int)ellipse.Margin.Left &&
-                                       (int)x.Margin.Bottom == (int)ellipse.Margin.Bottom).Any())
+                                       (int)x.Margin.Bottom == (int)ellipse.Margin.Bottom).Count() > 0)
                 return;
             _listPoints.Add(ellipse);
             _canvas.Children.Add(ellipse);
@@ -156,16 +157,10 @@ namespace EquationLPP.models {
                     var res = equation.CoefficientX1 * point.X + equation.CoefficientX2 * point.Y;
                     switch (equation.Sign) {
                         case Signs.GreaterThan:
-                            if (res < equation.Equal) {
-                                equation.DrawnPoints.Remove(point);
-                                RemoveDrawnPoint(point, listEquation);
-                            }
+                            if (res < equation.Equal) { RemoveDrawnPoint(point, listEquation); }
                             break;
                         case Signs.LessThan:
-                            if (res > equation.Equal) {
-                                equation.DrawnPoints.Remove(point);
-                                RemoveDrawnPoint(point, listEquation);
-                            }
+                            if (res > equation.Equal) { RemoveDrawnPoint(point, listEquation); }
                             break;
                         case Signs.Equal:
                             break;
@@ -181,6 +176,7 @@ namespace EquationLPP.models {
                 var convertPoint = ConvertPoint(point);
                 var pt = _listPoints.Where(x => x.Margin == new Thickness(convertPoint.X - 5, convertPoint.Y - 5, 0, 0))
                                     .ToList()[0];
+                elem.DrawnPoints.Remove(point);
                 _listPoints.Remove(pt);
                 _canvas.Children.Remove(pt);
             }
