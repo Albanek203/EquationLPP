@@ -24,7 +24,6 @@ namespace EquationLPP {
             serviceProvider.AddTransient<MainViewModel>();
             // Models
             serviceProvider.AddTransient<SystemEquations>();
-            serviceProvider.AddTransient<DrawingManager>();
         }
         private void App_OnStartup(object sender, StartupEventArgs e) {
             ServiceProvider.GetService<MainWindow>()!.Show();

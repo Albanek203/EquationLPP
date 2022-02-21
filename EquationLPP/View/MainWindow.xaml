@@ -22,11 +22,13 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="F =" VerticalAlignment="Center" FontSize="25" />
                     <TextBox Style="{StaticResource InputTextStyle}" Width="250"
-                             Text="{Binding SystemEquations.FunctionF}" />
+                             Text="{Binding SystemEquations.FunctionF}"
+                             PreviewTextInput="Data_OnPreviewTextInput" />
                 </StackPanel>
                 <TextBlock Grid.Row="1" Text="X1 >= 0 and X2 >= 0" Style="{StaticResource SimpleTextStyle}"
                            Margin="0,10,0,-5" />
@@ -64,7 +66,19 @@
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
-                <Button Grid.Row="3"
+                <StackPanel Grid.Row="3" Margin="10,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Z min:&#160;" Style="{StaticResource SimpleTextStyle}" />
+                        <TextBlock Style="{StaticResource SimpleTextStyle}"
+                                   Text="{Binding ZMin, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Z max:&#160;" Style="{StaticResource SimpleTextStyle}" />
+                        <TextBlock Style="{StaticResource SimpleTextStyle}"
+                                   Text="{Binding ZMax, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </StackPanel>
+                <Button Grid.Row="4"
                         Content="Show"
                         Margin="30,10"
                         Style="{StaticResource SimpleButtonStyle}"
@@ -78,7 +92,7 @@
                     BorderThickness="2"
                     Height="600"
                     Width="800" Margin="0,-10,0,0">
-                <Canvas Name="Canvas" ClipToBounds="True">
+                <Canvas Name="Canvas" ClipToBounds="True" Loaded="Canvas_OnLoaded">
                     <Polyline Stroke="Black" StrokeThickness="2" Points="390, 10, 400, 1, 410, 10" />
                     <Line Stroke="Black"
                           StrokeThickness="2"

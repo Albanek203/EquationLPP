@@ -75,5 +75,6 @@ namespace EquationLPP.View {
             var regex = new Regex("[^0-9x<>=+-]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+        private void Canvas_OnLoaded(object sender, RoutedEventArgs e) { ((MainViewModel)DataContext).Canvas = Canvas; }
     }
 }
