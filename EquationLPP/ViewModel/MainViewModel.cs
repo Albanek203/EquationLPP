@@ -9,7 +9,6 @@ using System.Windows.Media;
 using EquationLPP.Infrastructure;
 using EquationLPP.models;
 using Button = System.Windows.Controls.Button;
-using MessageBox = System.Windows.MessageBox;
 
 namespace EquationLPP.ViewModel {
     public class MainViewModel : BaseViewModel {
@@ -70,7 +69,6 @@ namespace EquationLPP.ViewModel {
         public ICommand ShowResult => _showResult ??= new RelayCommand(ExecuteShowResult);
         private async void ExecuteShowResult(object obj) {
             await _drawingManager.DrawLinesAsync(SystemEquations.ListEquation);
-            MessageBox.Show(_drawingManager.CountPoint(SystemEquations.ListEquation).ToString());
             if (SystemEquations.ParseFunctionF()) {
                 await _drawingManager.DrawVectorNAsync(SystemEquations.EndPointFunctionF);
                 var minMaxValues = _drawingManager.CalculateMinMax(SystemEquations);
@@ -82,7 +80,6 @@ namespace EquationLPP.ViewModel {
                     ZMin = minMaxValues[0].ToString(CultureInfo.InvariantCulture);
                     ZMax = minMaxValues[1].ToString(CultureInfo.InvariantCulture);
                 }
-                MessageBox.Show(_drawingManager.CountPoint(SystemEquations.ListEquation).ToString());
             }
             else
                 await _drawingManager.RemoveVectorNAsync();
