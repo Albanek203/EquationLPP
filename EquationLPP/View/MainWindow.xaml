@@ -8,7 +8,8 @@
         ResizeMode="NoResize"
         Background="WhiteSmoke"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="720" Width="1280">
+        Icon="../Icons/icon.png"
+        Title="Equation LPP" Height="720" Width="1280">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

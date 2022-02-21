@@ -14,4 +14,14 @@
       <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.0.1641" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Icons\icon.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Icons\icon.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
