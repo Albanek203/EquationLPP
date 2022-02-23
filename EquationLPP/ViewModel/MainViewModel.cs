@@ -73,7 +73,7 @@ namespace EquationLPP.ViewModel {
                 await _drawingManager.DrawVectorNAsync(SystemEquations.EndPointFunctionF);
                 var minMaxValues = _drawingManager.CalculateMinMax(SystemEquations);
                 if (!_drawingManager.IsClosedArea(SystemEquations.ListEquation)) {
-                    ZMin = "-";
+                    ZMin = "-∞";
                     ZMax = minMaxValues[1].ToString(CultureInfo.InvariantCulture);
                 }
                 else {
